@@ -49,8 +49,14 @@ status_bat() {
     local accum_full=0;
 
     for battery in /sys/class/power_supply/BAT*; do
-        accum_now=$((accum_now + $(cat $battery/charge_now)))
-        accum_full=$((accum_full + $(cat $battery/charge_full)))
+        if [ -e "$battery/charge_now" ]
+            then
+            accum_now=$((accum_now + $(cat $battery/charge_now)))
+            accum_full=$((accum_full + $(cat $battery/charge_full)))
+        else
+            accum_now=$((accum_now + $(cat $battery/energy_now)))
+            accum_full=$((accum_full + $(cat $battery/energy_full)))
+        fi
     done
     local bat=$((100*accum_now/accum_full))
 
