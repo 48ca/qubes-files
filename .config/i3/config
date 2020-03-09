@@ -203,6 +203,8 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 bindsym $mod+l exec --no-startup-id "notify-send -a 'System' 'Locking...' && xautolock -enable && xautolock -locknow && xset dpms force off"
 bindsym $mod+Shift+s exec --no-startup-id "notify-send -a 'System' 'Suspending...' && xautolock -enable && xautolock -locknow && systemctl suspend"
+bindsym $mod+c exec "qvm-run personal firefox"
+bindsym $mod+m exec "qubes-qube-manager"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -226,3 +228,6 @@ exec --no-startup-id "xautolock -detectsleep -time 3 -locker 'i3lock -i /home/ja
 # Make sure all xdg autostart entries are started, this is (among other things)
 # necessary to make sure transient vm's come up
 exec --no-startup-id qubes-i3-xdg-autostart
+
+# Flip scrolling to natural
+exec --no-startup-id /home/james/.config/i3/startup.sh
